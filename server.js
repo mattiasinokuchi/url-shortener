@@ -18,7 +18,11 @@ useUnifiedTopology: true,
 useNewUrlParser: true,
 });
 
-let Schema = mongoose.Schema;
+//map to a MongoDB collection and define the shape of the documents within
+const Schema = mongoose.Schema;
+const appSchema = new Schema ({
+  
+});
 
 app.use(cors());
 
