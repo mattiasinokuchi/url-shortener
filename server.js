@@ -25,16 +25,21 @@ mongoose.connect(process.env.DB_URI, {
 });
 
 //definition of the constructor for MongoDB documents
-const appSchema = new mongoose.Schema ({
+const mongooseSchema = new mongoose.Schema ({
   original_url: String,
   short_url: String
 });
 
 //definition of the class (working copy of the constructor) for MongoDB documents 
-const AppModel = mongoose.model ("AppModel", appSchema);
+const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
-//creation of MongoDB documents
-//let newDocumt
+//creation of a MongoDB document
+/*
+let testDocument = new AppModel({
+  original_url: ???
+  short_url: ???
+});
+*/
 
 app.use(cors());
 
