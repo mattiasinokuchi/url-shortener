@@ -1,7 +1,13 @@
 'use strict';
 
 const express = require('express');
+
+//mounts the mongo database
+
 const mongo = require('mongodb');
+
+//mounts the　mongoose framework for the mongodatabase
+
 const mongoose = require('mongoose');
 
 const cors = require('cors');
@@ -25,7 +31,7 @@ const appSchema = new mongoose.Schema ({
 });
 
 //conversion of MongoDB schema to model 
-const 
+const AppModel = mongoose.model ("AppModel", appSchema);
 
 app.use(cors());
 
