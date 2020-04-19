@@ -6,7 +6,7 @@ const express = require('express');
 
 const mongo = require('mongodb');
 
-//mounts the　mongoose framework for the mongodatabase
+//mounts the　mongoose framework for the mongo database
 
 const mongoose = require('mongoose');
 
@@ -24,13 +24,13 @@ mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
 });
 
-//definition of the MongoDB documents
+//definition of the constructor for MongoDB documents
 const appSchema = new mongoose.Schema ({
   original_url: String,
   short_url: String
 });
 
-//conversion of MongoDB schema to model 
+//working copy of the constructor for MongoDB documents 
 const AppModel = mongoose.model ("AppModel", appSchema);
 
 app.use(cors());
