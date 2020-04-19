@@ -30,8 +30,11 @@ const appSchema = new mongoose.Schema ({
   short_url: String
 });
 
-//working copy of the constructor for MongoDB documents 
+//definition of the class (working copy of the constructor) for MongoDB documents 
 const AppModel = mongoose.model ("AppModel", appSchema);
+
+//creation of MongoDB documents
+//let newDocumt
 
 app.use(cors());
 
