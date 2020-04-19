@@ -20,8 +20,12 @@ mongoose.connect(process.env.DB_URI, {
 
 //definition of the MongoDB documents
 const appSchema = new mongoose.Schema ({
-  
+  original_url: String,
+  short_url: String
 });
+
+//conversion of MongoDB schema to model 
+const 
 
 app.use(cors());
 
