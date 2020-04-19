@@ -33,13 +33,13 @@ const mongooseSchema = new mongoose.Schema ({
 //definition of the class (working copy of the constructor) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
-//creation of a MongoDB document
-/*
-let testDocument = new AppModel({
-  original_url: ???
-  short_url: ???
+//creation of a MongoDB test document
+let testDocument = new MongooseModel({
+  original_url: "Hello World!",
+  short_url: "Hello World!"
 });
-*/
+
+testDocument.save( ())
 
 app.use(cors());
 
