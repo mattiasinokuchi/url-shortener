@@ -20,6 +20,7 @@ const port = process.env.PORT || 3000;
 mongoose.connect(process.env.DB_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  useCreateIndex: true
 });
 
 //definition of the constructor for MongoDB documents
