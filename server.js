@@ -32,7 +32,7 @@ const mongooseSchema = new mongoose.Schema ({
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
 //creates, saves and finds a MongoDB test document
-let testDocument = new MongooseModel({
+/*let testDocument = new MongooseModel({
   original_url: "Hello World!",
   short_url: "Hello World!"
 });
@@ -44,7 +44,7 @@ testDocument.save((err, testDocument) => {
 MongooseModel.find((err, documents)=> {
   if (err) return console.error(err);
   console.log(documents);
-});
+});*/
 
 app.use(cors());
 
