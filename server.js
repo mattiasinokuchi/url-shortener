@@ -39,7 +39,9 @@ let testDocument = new MongooseModel({
   short_url: "Hello World!"
 });
 
-testDocument.save( ())
+testDocument.save( (err, testDocument) => {
+  if (err) return console.error(err);
+});
 
 app.use(cors());
 
