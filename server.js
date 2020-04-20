@@ -24,7 +24,7 @@ mongoose.connect(process.env.DB_URI, {
 
 //definition of the constructor for MongoDB documents
 const mongooseSchema = new mongoose.Schema ({
-  original_url: String,
+  original_url: String, unique: true,
   short_url: String
 });
 
