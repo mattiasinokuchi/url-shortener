@@ -24,15 +24,21 @@ mongoose.connect(process.env.DB_URI, {
 
 //definition of the constructor for MongoDB documents
 const mongooseSchema = new mongoose.Schema ({
-  original_url: String, unique: true,
-  short_url: String
+  original_url: {
+    type: String,
+    unique: true
+  },
+  short_url: {
+    type: String,
+    unique: true
+  }
 });
 
 //definition of the class (working copy of the constructor) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
 //creates, saves and finds a MongoDB test document
-/*let testDocument = new MongooseModel({
+let testDocument = new MongooseModel({
   original_url: "Hello World!",
   short_url: "Hello World!"
 });
@@ -44,7 +50,7 @@ testDocument.save((err, testDocument) => {
 MongooseModel.find((err, documents)=> {
   if (err) return console.error(err);
   console.log(documents);
-});*/
+});
 
 app.use(cors());
 
