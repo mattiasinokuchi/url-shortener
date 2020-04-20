@@ -2,12 +2,10 @@
 
 const express = require('express');
 
-//mounts the mongo database
-
+//mounts the database
 const mongo = require('mongodb');
 
-//mounts the　mongoose framework for the mongo database
-
+//mounts the　database framework
 const mongoose = require('mongoose');
 
 const cors = require('cors');
@@ -33,14 +31,19 @@ const mongooseSchema = new mongoose.Schema ({
 //definition of the class (working copy of the constructor) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
-//creation of a MongoDB test document
+//creates, saves and finds a MongoDB test document
 let testDocument = new MongooseModel({
   original_url: "Hello World!",
   short_url: "Hello World!"
 });
 
-testDocument.save( (err, testDocument) => {
+testDocument.save((err, testDocument) => {
   if (err) return console.error(err);
+});
+
+MongooseModel.find((err, documents)=> {
+  if (err) return console.error(err);
+  console.log(documents);
 });
 
 app.use(cors());
