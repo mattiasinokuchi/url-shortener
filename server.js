@@ -75,25 +75,27 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-// count documents in MongoDB
+// count documents in the database
+let documentCount = 0;
 MongooseModel.countDocuments((err, count) => {
   console.log('there are %d documents', count);
+  documentCount = count+1;
 });
 
-// POST data
+// POST and saves documents
 app.post("/api/shorturl/new", (req, res) => {
   let mongodbDocument = new MongooseModel({
     original_url: req.body.url,
-    short_url: "Not yet!"
+    short_url: documentCount
   });
   mongodbDocument.save((err, data) => {
     if (err) return console.error(err);
   });
   res.json({original_url: req.body.url,
-    short_url: "Not yet!"});
+    short_url: documentCount});
 });
 
-// log documents in MongoDB
+// log documents in database
 MongooseModel.find((err, documents)=> {
   if (err) return console.error(err);
   console.log(documents);
