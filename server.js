@@ -53,7 +53,7 @@ MongooseModel.find((err, documents)=> {
   console.log(documents);
 });
 
-MongooseModel.remove({ orginal_url: "Hello World!" }, (err, data) => {
+MongooseModel.deleteMany({ original_url: "Hello World!" }, (err) => {
   if (err) return console.log(err);
 });
 
