@@ -75,6 +75,12 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+/* 12) Get data form POST
+app.post("/name", (req, res) => {
+  let string = req.body.first + " " + req.body.last;
+  res.json({name: string});
+});*/
+
 // get data from POST
 app.post("api/shorturl/new", (req, res) => {
   let string = req.body.url;
