@@ -39,7 +39,7 @@ const mongooseSchema = new mongoose.Schema ({
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
 //create, save, find and delete a MongoDB test document
-let testDocument = new MongooseModel({
+/*let testDocument = new MongooseModel({
   original_url: "Hello World!",
   short_url: "Hello World!"
 });
@@ -55,7 +55,7 @@ MongooseModel.find((err, documents)=> {
 
 MongooseModel.deleteMany({ original_url: "Hello World!" }, (err) => {
   if (err) return console.log(err);
-});
+});*/
 
 app.use(cors());
 
@@ -78,8 +78,21 @@ app.get("/api/hello", function (req, res) {
 // get data from POST
 app.post("/api/shorturl/new", (req, res) => {
   let string = req.body.url;
-  res.json({url: string});
+  let mongodbDocument = new 
+  
+//  res.json({url: string});
 });
+
+/*
+let createAndSavePerson = (done) => {
+  let firstPerson = new Person({ name: "Adam", age: 0, favoriteFoods: [ "milk", "honey" ] });
+  firstPerson.save((err, data) => {
+    if(err) return console.error(err);
+    done(null, data);
+  });
+}
+*/
+
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
