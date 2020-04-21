@@ -75,9 +75,8 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-// get data from POST
+// POST data
 app.post("/api/shorturl/new", (req, res) => {
-//  let string = req.body.url;
   let mongodbDocument = new MongooseModel({
     original_url: req.body.url,
     short_url: "Not yet!"
@@ -85,7 +84,8 @@ app.post("/api/shorturl/new", (req, res) => {
   mongodbDocument.save((err, data) => {
     if (err) return console.error(err);
   });
-//  res.json({url: string});
+  res.json({original_url: req.body.url,
+    short_url: "Not yet!"});
 });
 
 // log documents in MongoDB
@@ -93,16 +93,6 @@ MongooseModel.find((err, documents)=> {
   if (err) return console.error(err);
   console.log(documents);
 });
-
-/*
-let createAndSavePerson = (done) => {
-  let firstPerson = new Person({ name: "Adam", age: 0, favoriteFoods: [ "milk", "honey" ] });
-  firstPerson.save((err, data) => {
-    if(err) return console.error(err);
-    done(null, data);
-  });
-}
-*/
 
 
 app.listen(port, function () {
