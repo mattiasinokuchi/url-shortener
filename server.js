@@ -53,6 +53,8 @@ MongooseModel.find((err, documents)=> {
   console.log(documents);
 });
 
+MongooseModel.deleteOne({original_url: "Hello World!"}, (err));
+
 app.use(cors());
 
 /** this project needs to parse POST bodies **/
