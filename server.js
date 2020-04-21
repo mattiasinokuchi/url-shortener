@@ -78,8 +78,7 @@ app.get("/api/hello", function (req, res) {
 // get data from POST
 app.post("api/shorturl/new", (req, res) => {
   let string = req.body.url;
-  console.log(string);
-//  res.json({url: string});
+  res.json({url: string});
 });
 
 app.listen(port, function () {
