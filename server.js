@@ -75,6 +75,11 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+// count documents in MongoDB
+MongooseModel.countDocuments((err, count) => {
+  console.log('there are %d documents', count);
+});
+
 // POST data
 app.post("/api/shorturl/new", (req, res) => {
   let mongodbDocument = new MongooseModel({
