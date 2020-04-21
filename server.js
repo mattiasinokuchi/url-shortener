@@ -53,7 +53,7 @@ MongooseModel.find((err, documents)=> {
   console.log(documents);
 });
 
-MongooseModel.deleteOne({original_url: "Hello World!"}, (err));
+const res = await MongooseModel.deleteOne({original_url: "Hello World!"});
 
 app.use(cors());
 
