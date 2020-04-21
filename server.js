@@ -78,7 +78,7 @@ app.get("/api/hello", function (req, res) {
 // count documents in the database
 let documentCount = 0;
 MongooseModel.countDocuments((err, count) => {
-  console.log('there are %d documents', count);
+  if (err) return console.error(err);
   documentCount = count+1;
 });
 
