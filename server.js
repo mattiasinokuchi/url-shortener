@@ -77,10 +77,21 @@ app.get("/api/hello", function (req, res) {
 
 // get data from POST
 app.post("/api/shorturl/new", (req, res) => {
-  let string = req.body.url;
-  let mongodbDocument = new 
-  
+//  let string = req.body.url;
+  let mongodbDocument = new MongooseModel({
+    original_url: req.body.url,
+    short_url: "Not yet!"
+  });
+  mongodbDocument.save((err, data) => {
+    if (err) return console.error(err);
+  });
 //  res.json({url: string});
+});
+
+// log documents in MongoDB
+MongooseModel.find((err, documents)=> {
+  if (err) return console.error(err);
+  console.log(documents);
 });
 
 /*
