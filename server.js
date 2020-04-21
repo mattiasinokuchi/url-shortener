@@ -38,7 +38,7 @@ const mongooseSchema = new mongoose.Schema ({
 //definition of the class (working copy of the constructor) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
-//creates, saves and finds a MongoDB test document
+//create, save, find and delete a MongoDB test document
 let testDocument = new MongooseModel({
   original_url: "Hello World!",
   short_url: "Hello World!"
@@ -73,6 +73,12 @@ app.get('/', function(req, res){
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
+});
+
+// get data from POST
+app.post("api/shorturl/new", (req, res) => {
+  let string = req.body.url;
+  res.json({url: string});
 });
 
 app.listen(port, function () {
