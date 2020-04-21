@@ -20,12 +20,19 @@ const port = process.env.PORT || 3000;
 mongoose.connect(process.env.DB_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+//  useCreateIndex: true
 });
 
 //definition of the constructor for MongoDB documents
 const mongooseSchema = new mongoose.Schema ({
-  original_url: String,
-  short_url: String
+  original_url: {
+    type: String,
+//    unique: true
+  },
+  short_url: {
+    type: String,
+//    unique: true
+  }
 });
 
 //definition of the class (working copy of the constructor) for MongoDB documents 
