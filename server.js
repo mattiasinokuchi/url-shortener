@@ -53,16 +53,9 @@ MongooseModel.find((err, documents)=> {
   console.log(documents);
 });
 
-let removeManyPeople = (done) => {
-  let nameToRemove = "Mary";
-  MongooseModel.remove(
-    { name: nameToRemove },
-    (err, data) => {
-      if (err) return console.log(err);
-      done (null, data);
-    }
-  );
-}
+MongooseModel.remove({ orginal_url: "Hello World!" }, (err, data) => {
+  if (err) return console.log(err);
+});
 
 app.use(cors());
 
