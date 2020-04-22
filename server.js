@@ -61,6 +61,12 @@ MongooseModel.countDocuments((err, count) => {
   documentCount = count+1;
 });
 
+// dns lookup
+dns.lookup('freecodecamp.org', (err, address, family) => {
+  if (err) return console.error(err);
+  console.log('address: %j family: IPv%s', address, family);
+});
+
 // POST and saves documents
 app.post("/api/shorturl/new", (req, res) => {
   let mongodbDocument = new MongooseModel({
@@ -78,12 +84,6 @@ app.post("/api/shorturl/new", (req, res) => {
 MongooseModel.find((err, documents)=> {
   if (err) return console.error(err);
   console.log(documents);
-});
-
-// dns lookup
-dns.lookup('http://www.beuybubfdeubdyuyabwxjhsbchjebcjhbsajhbcec.com/', (err, address, family) => {
-  if (err) return console.error(err);
-  console.log('address: %j family: IPv%s', address, family);
 });
 
 app.listen(port, function () {
