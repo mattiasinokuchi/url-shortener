@@ -62,7 +62,7 @@ MongooseModel.countDocuments((err, count) => {
 });
 
 // dns lookup
-dns.lookup("www.freecodecamp.org", (err, address, family) => {
+dns.lookup("https://www.freecodecamp.org", (err, address, family) => {
   if (err) return console.error(err);
   console.log('address: %j family: IPv%s', address, family);
 });
