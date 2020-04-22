@@ -80,6 +80,11 @@ MongooseModel.find((err, documents)=> {
   console.log(documents);
 });
 
+// dns lookup
+dns.lookup('http://www.beuybubfdeubdyuyabwxjhsbchjebcjhbsajhbcec.com/', (err, address, family) => {
+  if (err) return console.error(err);
+  console.log('address: %j family: IPv%s', address, family);
+});
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
