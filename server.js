@@ -38,25 +38,6 @@ const mongooseSchema = new mongoose.Schema ({
 //definition of the class (working copy of the constructor) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
-//create, save, find and delete a MongoDB test document
-/*let testDocument = new MongooseModel({
-  original_url: "Hello World!",
-  short_url: "Hello World!"
-});
-
-testDocument.save((err, testDocument) => {
-  if (err) return console.error(err);
-});
-
-MongooseModel.find((err, documents)=> {
-  if (err) return console.error(err);
-  console.log(documents);
-});
-
-MongooseModel.deleteMany({ original_url: "Hello World!" }, (err) => {
-  if (err) return console.log(err);
-});*/
-
 app.use(cors());
 
 /** this project needs to parse POST bodies **/
@@ -70,11 +51,6 @@ app.get('/', function(req, res){
   res.sendFile(process.cwd() + '/views/index.html');
 });
   
-// your first API endpoint... 
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
-});
-
 // count documents in the database
 let documentCount = 0;
 MongooseModel.countDocuments((err, count) => {
