@@ -10,6 +10,9 @@ const mongoose = require('mongoose');
 
 const cors = require('cors');
 
+//mounts the dns module
+const dns = require("dns");
+
 const app = express();
 
 // Basic Configuration 
