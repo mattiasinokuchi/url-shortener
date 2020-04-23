@@ -72,7 +72,9 @@ console.log(url.hostname); // "www.example.com"*/
 
 // POST and saves documents
 app.post("/api/shorturl/new", (req, res) => {
-  dns.lookup(req.body.url, (err, address, family) => {
+  
+  let url = new URL(req.body.url);
+  dns.lookup(url.hostname, (err, address, family) => {
     if (err) return console.error(err);
     console.log('address: %j family: IPv%s', address, family);
   });
