@@ -61,14 +61,12 @@ MongooseModel.countDocuments((err, count) => {
   documentCount = count+1;
 });
 
-// dns lookup
-/*dns.lookup("https://www.freecodecamp.org", (err, address, family) => {
-  if (err) return console.error(err);
-  console.log('address: %j family: IPv%s', address, family);
-});
-
-const url = new URL('../cats', 'http://www.example.com/dogs');
-console.log(url.hostname); // "www.example.com"*/
+/*let findPeopleByName = (personName, done) => {
+  Person.find({name: personName}, (err, data) => {
+    if (err) return console.log(err);
+    done(null, data);
+  });
+}*/
 
 // POST and saves documents
 app.post("/api/shorturl/new", (req, res) => {
