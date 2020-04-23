@@ -69,7 +69,9 @@ MongooseModel.countDocuments((err, count) => {
 }*/
 
 // executes, passing results to callback
-MongooseModel.find({ original_url: "https://www.freecodecamp.org", (err, docs) {});
+MongooseModel.find({ original_url: "https://www.freecodecamp.org"}, (err, docs) => {
+  
+});
 
 // POST and saves documents
 app.post("/api/shorturl/new", (req, res) => {
