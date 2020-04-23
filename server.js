@@ -62,13 +62,13 @@ MongooseModel.countDocuments((err, count) => {
 });
 
 // dns lookup
-dns.lookup("https://www.freecodecamp.org", (err, address, family) => {
+/*dns.lookup("https://www.freecodecamp.org", (err, address, family) => {
   if (err) return console.error(err);
   console.log('address: %j family: IPv%s', address, family);
 });
 
 const url = new URL('../cats', 'http://www.example.com/dogs');
-console.log(url.hostname); // "www.example.com"
+console.log(url.hostname); // "www.example.com"*/
 
 // POST and saves documents
 app.post("/api/shorturl/new", (req, res) => {
