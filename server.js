@@ -72,21 +72,28 @@ console.log(url.hostname); // "www.example.com"*/
 
 // POST and saves documents
 app.post("/api/shorturl/new", (req, res) => {
-  
   let url = new URL(req.body.url);
   dns.lookup(url.hostname, (err, address, family) => {
-    if (err) return console.error(err);
-    console.log('address: %j family: IPv%s', address, family);
+    if (err) {
+      return console.error(err);
+      console.log('address: %j family: IPv%s', address, family);
+      res.json({
+        error: "invalid URL"
+      });
+    } else {
+      let mongodbDocument = new MongooseModel({
+        original_url: req.body.url,
+        short_url: documentCount
+      });
+      mongodbDocument.save((err, data) => {
+        if (err) return console.error(err);
+      });
+      res.json({
+        original_url: req.body.url,
+        short_url: documentCount});
+    }
   });
-  let mongodbDocument = new MongooseModel({
-    original_url: req.body.url,
-    short_url: documentCount
-  });
-  mongodbDocument.save((err, data) => {
-    if (err) return console.error(err);
-  });
-  res.json({original_url: req.body.url,
-    short_url: documentCount});
+  
 });
 
 // log documents in database
