@@ -75,8 +75,7 @@ app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
   dns.lookup(url.hostname, (err, address, family) => {
     if (err) {
-      return console.error(err);
-      console.log('address: %j family: IPv%s', address, family);
+      console.error(err);
       res.json({
         error: "invalid URL"
       });
