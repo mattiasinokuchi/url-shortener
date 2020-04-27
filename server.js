@@ -30,11 +30,11 @@ mongoose.connect(process.env.DB_URI, {
 const mongooseSchema = new mongoose.Schema ({
   original_url: {
     type: String,
-    unique: false
+    unique: true
   },
   short_url: {
     type: String,
-    unique: false
+    unique: true
   }
 });
 
@@ -54,14 +54,14 @@ app.get('/', function(req, res){
   res.sendFile(process.cwd() + '/views/index.html');
 });
   
-// count documents in the database
-let documentCount = 0;
+// short URL generator
+let shortURL = 0;
 MongooseModel.countDocuments((err, count) => {
   if (err) return console.error(err);
   documentCount = count+1;
 });
 
-/*    // searches for duplicate document in the database
+/*    // searches for duplicate URL in the database
       MongooseModel.find({ original_url: url}, (err, docs) => {
         if (err) return console.error(err);
       });
