@@ -55,10 +55,10 @@ app.get('/', function(req, res){
 });
   
 // short URL generator
-let shortURL = 0;
-MongooseModel.countDocuments((err, count) => {
+let urlCount = 0;
+MongooseModel.find({urlCount}, (err, count) => {
   if (err) return console.error(err);
-  documentCount = count+1;
+  urlCount = count;
 });
 
 /*    // searches for duplicate URL in the database
