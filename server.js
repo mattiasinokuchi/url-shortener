@@ -68,12 +68,7 @@ MongooseModel.countDocuments((err, count) => {
   });
 }*/
 
-// executes, passing results to callback
-MongooseModel.find({ original_url: "https://www.freecodecamp.org"}, (err, docs) => {
-  
-});
-
-// POST and saves documents
+// POST a url
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
   dns.lookup(url.hostname, (err, address, family) => {
@@ -83,6 +78,12 @@ app.post("/api/shorturl/new", (req, res) => {
         error: "invalid URL"
       });
     } else {
+      
+      // searches for duplicate document in the database
+      MongooseModel.find({ original_url: "https://www.freecodecamp.org"}, (err, docs) => {
+        if (err) return console.error(err);
+      });
+      
       let mongodbDocument = new MongooseModel({
         original_url: req.body.url,
         short_url: documentCount
