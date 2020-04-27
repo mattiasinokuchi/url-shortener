@@ -58,7 +58,10 @@ app.get('/', function(req, res){
 let urlCount = 0;
 MongooseModel.find({urlCount}, (err, count) => {
   if (err) return console.error(err);
-  urlCount = count;
+  if (count === []) {
+    
+  }
+  console.log(count);
 });
 
 /*    // searches for duplicate URL in the database
