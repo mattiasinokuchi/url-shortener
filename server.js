@@ -61,12 +61,11 @@ MongooseModel.countDocuments((err, count) => {
   documentCount = count+1;
 });
 
-/*let findPeopleByName = (personName, done) => {
-  Person.find({name: personName}, (err, data) => {
-    if (err) return console.log(err);
-    done(null, data);
-  });
-}*/
+/*    // searches for duplicate document in the database
+      MongooseModel.find({ original_url: url}, (err, docs) => {
+        if (err) return console.error(err);
+      });
+*/
 
 // POST a URL
 app.post("/api/shorturl/new", (req, res) => {
@@ -79,11 +78,6 @@ app.post("/api/shorturl/new", (req, res) => {
         error: "invalid URL"
       });
     } else {
-      // searches for duplicate document in the database
-      MongooseModel.find({ original_url: url}, (err, docs) => {
-        if (err) return console.error(err);
-      });
-      
       let mongodbDocument = new MongooseModel({
         original_url: req.body.url,
         short_url: documentCount
