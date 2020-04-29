@@ -38,12 +38,8 @@ const mongooseSchema = new mongoose.Schema ({
   }
 });
 
-// definition of the constructor 
-
 // definition of the class (working copy of the constructor) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
-
-// 
 
 app.use(cors());
 
@@ -58,13 +54,14 @@ app.get('/', function(req, res){
   res.sendFile(process.cwd() + '/views/index.html');
 });
   
-// find new number for a short URL
+// find new number for short URL
 let newShortURL;
 MongooseModel
   .findOne()
   .sort({short_url: "descending"})
   .exec((err, doc) => {
-    if(err) return console.error(err);
+    if 
+    if (err) return console.error(err);
     console.log(doc);
     newShortURL = parseInt(doc.short_url)+1;
     console.log(newShortURL);
@@ -102,10 +99,10 @@ app.post("/api/shorturl/new", (req, res) => {
 });
 
 // log documents in database
-/*MongooseModel.find((err, doc)=> {
+MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
   console.log(doc);
-});*/
+});
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
