@@ -55,21 +55,14 @@ app.get('/', function(req, res){
 });
   
 // find new number for short URL
-let newShortURL;
+let newShortURL = 0;
 function findNewShortURL() {
   MongooseModel
     .findOne()
     .sort({short_url: "descending"})
     .exec((err, doc) => {
       if (err) return console.error(err);
-      if (doc === null) {
-        newShortURL = 1;
-        console.log("no documents")
-      } else {
       newShortURL = (parseInt(doc.short_url)+1).toString();
-      }
-      console.log(newShortURL);
-      return;
   });
 }
   
