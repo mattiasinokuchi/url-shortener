@@ -56,19 +56,22 @@ app.get('/', function(req, res){
   
 // find new number for short URL
 let newShortURL;
-MongooseModel
-  .findOne()
-  .sort({short_url: "descending"})
-  .exec((err, doc) => {
-    if (err) return console.error(err);
-    if (doc === null) {
-      newShortURL = 1;
-    } else {
-    newShortURL = parseInt(doc.short_url)+1;
-    }
-    console.log(newShortURL);
-});
-
+function findNewShortURL() {
+  MongooseModel
+    .findOne()
+    .sort({short_url: "descending"})
+    .exec((err, doc) => {
+      if (err) return console.error(err);
+      if (doc === null) {
+        newShortURL = 1;
+      } else {
+      newShortURL = parseInt(doc.short_url)+1;
+      }
+      console.log(newShortURL);
+      return;
+  });
+}
+  
 /*    // searches for duplicate URL in the database
       MongooseModel.find({ original_url: url}, (err, docs) => {
         if (err) return console.error(err);
@@ -86,6 +89,7 @@ app.post("/api/shorturl/new", (req, res) => {
         error: "invalid URL"
       });
     } else {
+      findNewShortURL;
       let mongodbDocument = new MongooseModel({
         original_url: req.body.url,
         short_url: newShortURL
