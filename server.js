@@ -30,11 +30,11 @@ mongoose.connect(process.env.DB_URI, {
 const mongooseSchema = new mongoose.Schema ({
   original_url: {
     type: String,
-    unique: true
+    unique: false
   },
   short_url: {
     type: String,
-    unique: true
+    unique: false
   }
 });
 
@@ -64,8 +64,9 @@ function findNewShortURL() {
       if (err) return console.error(err);
       if (doc === null) {
         newShortURL = 1;
+        console.log("no documents")
       } else {
-      newShortURL = parseInt(doc.short_url)+1;
+      newShortURL = (parseInt(doc.short_url)+1).toString();
       }
       console.log(newShortURL);
       return;
