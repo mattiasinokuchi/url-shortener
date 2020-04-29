@@ -62,6 +62,7 @@ MongooseModel
   .exec((err, doc) => {
     if(err) return console.error(err);
     console.log(doc);
+    urlCount = doc.short
 });
 
 /*    // searches for duplicate URL in the database
