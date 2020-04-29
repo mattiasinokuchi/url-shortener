@@ -56,7 +56,10 @@ app.get('/', function(req, res){
   
 // short URL generator
 let urlCount = 0;
-MongooseModel.findOne().sort()((err, count) => {;
+MongooseModel
+  .findOne()
+  .sort({short_url: "ascending"})
+  .exec();
 
 /*    // searches for duplicate URL in the database
       MongooseModel.find({ original_url: url}, (err, docs) => {
