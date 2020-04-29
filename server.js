@@ -54,12 +54,15 @@ app.get('/', function(req, res){
   res.sendFile(process.cwd() + '/views/index.html');
 });
   
-// short URL generator
+// find number for short URL
 let urlCount = 0;
 MongooseModel
   .findOne()
   .sort({short_url: "ascending"})
-  .exec();
+  .exec((err, doc) => {
+    if(err) return console.error(err);
+    console.log(doc);
+});
 
 /*    // searches for duplicate URL in the database
       MongooseModel.find({ original_url: url}, (err, docs) => {
@@ -93,9 +96,9 @@ app.post("/api/shorturl/new", (req, res) => {
 });
 
 // log documents in database
-MongooseModel.find((err, documents)=> {
+MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
-  console.log(documents);
+  console.log(doc);
 });
 
 app.listen(port, function () {
