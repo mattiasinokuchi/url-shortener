@@ -90,7 +90,9 @@ app.post("/api/shorturl/new", (req, res) => {
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
-      res.data;
+      res.json({
+        original_url: req.body.url,
+        short_url: newShortURL});
     }
   });
 });
