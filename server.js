@@ -54,15 +54,16 @@ app.get('/', function(req, res){
   res.sendFile(process.cwd() + '/views/index.html');
 });
   
-// find number for short URL
+// find new number for short URL
 let urlCount = 0;
 MongooseModel
   .findOne()
-  .sort({short_url: "ascending"})
+  .sort({short_url: "descending"})
   .exec((err, doc) => {
     if(err) return console.error(err);
     console.log(doc);
-    urlCount = doc.short
+    urlCount = doc.short_url+1;
+    console.log(urlCount);
 });
 
 /*    // searches for duplicate URL in the database
