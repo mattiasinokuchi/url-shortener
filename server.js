@@ -38,8 +38,12 @@ const mongooseSchema = new mongoose.Schema ({
   }
 });
 
-//definition of the class (working copy of the constructor) for MongoDB documents 
+// definition of the constructor 
+
+// definition of the class (working copy of the constructor) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
+
+// 
 
 app.use(cors());
 
