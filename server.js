@@ -56,13 +56,7 @@ app.get('/', function(req, res){
   
 // short URL generator
 let urlCount = 0;
-MongooseModel.find({urlCount}, (err, count) => {
-  if (err) return console.error(err);
-  if (count === []) {
-    
-  }
-  console.log(count);
-});
+MongooseModel.findOne().sort()((err, count) => {;
 
 /*    // searches for duplicate URL in the database
       MongooseModel.find({ original_url: url}, (err, docs) => {
@@ -83,17 +77,16 @@ app.post("/api/shorturl/new", (req, res) => {
     } else {
       let mongodbDocument = new MongooseModel({
         original_url: req.body.url,
-        short_url: documentCount
+        short_url: urlCount
       });
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
       res.json({
         original_url: req.body.url,
-        short_url: documentCount});
+        short_url: urlCount});
     }
   });
-  
 });
 
 // log documents in database
