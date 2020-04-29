@@ -98,10 +98,10 @@ app.post("/api/shorturl/new", (req, res) => {
 });
 
 // log documents in database
-MongooseModel.find((err, doc)=> {
+/*MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
   console.log(doc);
-});
+});*/
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
