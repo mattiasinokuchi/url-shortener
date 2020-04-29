@@ -60,10 +60,12 @@ MongooseModel
   .findOne()
   .sort({short_url: "descending"})
   .exec((err, doc) => {
-    if 
     if (err) return console.error(err);
-    console.log(doc);
+    if (doc === null) {
+      newShortURL = 1;
+    } else {
     newShortURL = parseInt(doc.short_url)+1;
+    }
     console.log(newShortURL);
 });
 
