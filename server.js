@@ -1,4 +1,4 @@
-// avoid silent errors, ka
+// avoid silent errors, make the app faster, avoid unsafe syntax for the future
 'use strict';
 
 // mounts web app framework
@@ -9,6 +9,7 @@ const mongo = require('mongodb');
 
 // mounts database framework
 const mongoose = require('mongoose');
+
 
 const cors = require('cors');
 
