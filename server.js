@@ -1,34 +1,35 @@
 // avoid silent errors, make the app faster, avoid unsafe syntax for the future
 'use strict';
 
-// mount web app framework
+// mount the web app framework
 const express = require('express');
 
-// mount database
+// mount the database
 const mongo = require('mongodb');
 
-// mount database framework
+// mount the database framework
 const mongoose = require('mongoose');
 
-// allow access to restricted resources in the app so it can be tested by FCC 
+// mount module to allow verification of the project by FCC 
 const cors = require('cors');
 
-// mount dns module for validation of URL
+// mount the dns module for validation of URL
 const dns = require("dns");
 
-// create web server
+// create the web server
 const app = express();
 
-// defines a port for the web server to listen to 
+// define a port for the web server to listen to 
 const port = process.env.PORT || 3000;
 
-// connects to data
+// connect to the database
 mongoose.connect(process.env.DB_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true
 });
 
+//  
 app.use(cors());
 
 //definition of the constructor for MongoDB documents
