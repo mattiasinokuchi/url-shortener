@@ -10,11 +10,14 @@ const mongo = require('mongodb');
 // mount the database framework
 const mongoose = require('mongoose');
 
-// mount module to allow verification of the project by FCC 
+// mount module to enable requests for verification of the project by FCC 
 const cors = require('cors');
 
 // mount the dns module for validation of URL
 const dns = require("dns");
+
+// mount module to parse POST bodies
+const bodyParser = require("body-parser");
 
 // create the web server
 const app = express();
@@ -29,7 +32,7 @@ mongoose.connect(process.env.DB_URI, {
   useCreateIndex: true
 });
 
-//  
+//  enable request for verification of the project by FCC
 app.use(cors());
 
 //definition of the constructor for MongoDB documents
@@ -47,10 +50,6 @@ const mongooseSchema = new mongoose.Schema ({
 // definition of the class (working copy of the constructor) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
-
-/** this project needs to parse POST bodies **/
-// you should mount the body-parser here
-const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/public', express.static(process.cwd() + '/public'));
