@@ -1,21 +1,22 @@
 // avoid silent errors, make the app faster, avoid unsafe syntax for the future
 'use strict';
 
-// mounts web app framework
+// mount web app framework
 const express = require('express');
 
-// mounts database
+// mount database
 const mongo = require('mongodb');
 
-// mounts database framework
+// mount database framework
 const mongoose = require('mongoose');
 
-// allows restricted resources to be requested so that your API is remotely testable by FCC 
+// allow access to restricted resources so that the app can be tested by FCC 
 const cors = require('cors');
 
-//mounts the dns module
+// mount dns module for validation of URL
 const dns = require("dns");
 
+// create server
 const app = express();
 
 // Basic Configuration 
