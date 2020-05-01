@@ -1,11 +1,13 @@
+// avoid silent errors, ka
 'use strict';
 
+// mounts web app framework
 const express = require('express');
 
-//mounts the database
+// mounts database
 const mongo = require('mongodb');
 
-//mounts the　database framework
+// mounts database framework
 const mongoose = require('mongoose');
 
 const cors = require('cors');
@@ -26,6 +28,8 @@ mongoose.connect(process.env.DB_URI, {
   useCreateIndex: true
 });
 
+app.use(cors());
+
 //definition of the constructor for MongoDB documents
 const mongooseSchema = new mongoose.Schema ({
   original_url: {
@@ -41,7 +45,6 @@ const mongooseSchema = new mongoose.Schema ({
 // definition of the class (working copy of the constructor) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
-app.use(cors());
 
 /** this project needs to parse POST bodies **/
 // you should mount the body-parser here
