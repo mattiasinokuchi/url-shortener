@@ -10,7 +10,7 @@ const mongo = require('mongodb');
 // mounts database framework
 const mongoose = require('mongoose');
 
-
+// allows restricted resources to be requested so that your API is remotely testable by FCC 
 const cors = require('cors');
 
 //mounts the dns module
