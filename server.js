@@ -10,20 +10,19 @@ const mongo = require('mongodb');
 // mount database framework
 const mongoose = require('mongoose');
 
-// allow access to restricted resources so that the app can be tested by FCC 
+// allow access to restricted resources in the app so it can be tested by FCC 
 const cors = require('cors');
 
 // mount dns module for validation of URL
 const dns = require("dns");
 
-// create server
+// create web server
 const app = express();
 
-// Basic Configuration 
+// defines a port for the web server to listen to 
 const port = process.env.PORT || 3000;
 
-/** this project needs a db !! **/ 
-// mongoose.connect(process.env.DB_URI);
+// connects to data
 mongoose.connect(process.env.DB_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
