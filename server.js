@@ -32,7 +32,15 @@ mongoose.connect(process.env.DB_URI, {
   useCreateIndex: true
 });
 
-//  enable module for verification of the project by FCC
+// enable web server for path with static files
+app.use('/public', express.static(process.cwd() + '/public'));
+
+// routing for 
+app.get('/', function(req, res) {
+  res.sendFile(process.cwd() + '/views/index.html');
+});
+
+// enable module for verification of the project by FCC
 app.use(cors());
 
 // enable module to parse POST bodies
@@ -53,11 +61,6 @@ const mongooseSchema = new mongoose.Schema ({
 // define model (class) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 
-app.use('/public', express.static(process.cwd() + '/public'));
-
-app.get('/', function(req, res){
-  res.sendFile(process.cwd() + '/views/index.html');
-});
   
 // find new number for short URL
 let newShortURL = 0;
