@@ -32,10 +32,10 @@ mongoose.connect(process.env.DB_URI, {
   useCreateIndex: true
 });
 
-// enable web server for path with static files
+// set web server with path for static files
 app.use('/public', express.static(process.cwd() + '/public'));
 
-// routing for 
+// set routing for web page
 app.get('/', function(req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
@@ -60,19 +60,6 @@ const mongooseSchema = new mongoose.Schema ({
 
 // define model (class) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
-
-  
-// find new number for short URL
-let newShortURL = 0;
-function findNewShortURL() {
-  MongooseModel
-    .findOne()
-    .sort({short_url: "descending"})
-    .exec((err, doc) => {
-      if (err) return console.error(err);
-      newShortURL = (parseInt(doc.short_url)+1).toString();
-  });
-}
   
 /*    // searches for duplicate URL in the database
       MongooseModel.find({ original_url: url}, (err, docs) => {
@@ -91,17 +78,16 @@ app.post("/api/shorturl/new", (req, res) => {
         error: "invalid URL"
       });
     } else {
-      findNewShortURL;
       let mongodbDocument = new MongooseModel({
         original_url: req.body.url,
-        short_url: newShortURL
+        short_url: "to be defined"
       });
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
       res.json({
         original_url: req.body.url,
-        short_url: newShortURL});
+        short_url: "to be defined"});
     }
   });
 });
