@@ -1,41 +1,44 @@
-// avoid silent errors, make the app faster, avoid unsafe syntax for the future
+// avoid silent errors, make web app faster, avoid unsafe syntax for future
 'use strict';
 
-// mount the web app framework
+// mount web app framework
 const express = require('express');
 
-// mount the database
+// mount database
 const mongo = require('mongodb');
 
-// mount the database framework
+// mount database framework
 const mongoose = require('mongoose');
 
-// mount module to enable requests for verification of the project by FCC 
+// mount module for verification of the project by FCC 
 const cors = require('cors');
 
-// mount the dns module for validation of URL
+// mount module for validation of URL
 const dns = require("dns");
 
 // mount module to parse POST bodies
 const bodyParser = require("body-parser");
 
-// create the web server
+// create web server
 const app = express();
 
 // define a port for the web server to listen to 
 const port = process.env.PORT || 3000;
 
-// connect to the database
+// connect database
 mongoose.connect(process.env.DB_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true
 });
 
-//  enable request for verification of the project by FCC
+//  enable module for verification of the project by FCC
 app.use(cors());
 
-//definition of the constructor for MongoDB documents
+// enable module to parse POST bodies
+app.use(bodyParser.urlencoded({extended: false}));
+
+// define schema (constructor) for MongoDB documents
 const mongooseSchema = new mongoose.Schema ({
   original_url: {
     type: String,
@@ -47,10 +50,8 @@ const mongooseSchema = new mongoose.Schema ({
   }
 });
 
-// definition of the class (working copy of the constructor) for MongoDB documents 
+// define model (class) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
-
-app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
