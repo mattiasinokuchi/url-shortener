@@ -74,16 +74,14 @@ app.post("/api/shorturl/new", (req, res) => {
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
-      mongodbDocument.findOne({original_url: url.hostname}, (err, data) => {
+      MongooseModel.findOne({original_url: url.hostname}, (err, data) => {
         if (err) return console.log(err);
         res.json({
-          original_url: data.original_url,
-          short_url: data._id
+          original_url: "hej",
+          short_url: "hej"
         });
-      }
-  });
-}
-
+      });
+    }
   });
 });
 
@@ -93,7 +91,7 @@ app.get("/:urlId", (req, res) => {
   res.json({echo: urlId});
 });
 
-// log documents in database
+// log all documents in database
 MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
   console.log(doc);
