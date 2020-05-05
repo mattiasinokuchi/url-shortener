@@ -81,6 +81,12 @@ app.post("/api/shorturl/new", (req, res) => {
   });
 });
 
+// get input from client
+app.get("/:word", (req, res) => {
+  const { word } = req.params;
+  res.json({echo: word});
+});
+
 // log documents in database
 MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
