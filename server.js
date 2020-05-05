@@ -52,21 +52,11 @@ const mongooseSchema = new mongoose.Schema ({
     type: String,
     unique: false
   },
-  short_url: {
-    type: String,
-    unique: false
-  }
 });
 
 // define model (class) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
   
-/*    // searches for duplicate URL in the database
-      MongooseModel.find({ original_url: url}, (err, docs) => {
-        if (err) return console.error(err);
-      });
-*/
-
 // POST a URL
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
@@ -79,8 +69,7 @@ app.post("/api/shorturl/new", (req, res) => {
       });
     } else {
       let mongodbDocument = new MongooseModel({
-        original_url: req.body.url,
-        short_url: "to be defined"
+        original_url: url.hostname
       });
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
