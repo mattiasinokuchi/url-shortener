@@ -74,12 +74,9 @@ app.post("/api/shorturl/new", (req, res) => {
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
-      MongooseModel.findOne({original_url: url.hostname}, (err, data) => {
+      MongooseModel.find({original_url: url.hostname}, (err, data) => {
         if (err) return console.log(err);
-        res.json({
-          original_url: "hej",
-          short_url: "hej"
-        });
+        console.log(data);
       });
     }
   });
