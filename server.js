@@ -82,9 +82,9 @@ app.post("/api/shorturl/new", (req, res) => {
 });
 
 // get input from client
-app.get("/:word", (req, res) => {
-  const { word } = req.params;
-  res.json({echo: word});
+app.get("/:urlId", (req, res) => {
+  const { urlId } = req.params;
+  res.json({echo: urlId});
 });
 
 // log documents in database
