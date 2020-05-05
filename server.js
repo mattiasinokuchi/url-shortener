@@ -74,16 +74,16 @@ app.post("/api/shorturl/new", (req, res) => {
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
-      mongodbDocument.findOne({original_url: url.}, (err, data) => {
-    if (err) return console.log(err);
-    done(null, data);
+      mongodbDocument.findOne({original_url: url.hostname}, (err, data) => {
+        if (err) return console.log(err);
+        res.json({
+          original_url: data.original_url,
+          short_url: data._id
+        });
+      }
   });
 }
-      
-      res.json({
-        original_url: req.body.url,
-        short_url: "to be defined"});
-    }
+
   });
 });
 
