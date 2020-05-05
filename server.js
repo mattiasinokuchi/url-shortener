@@ -1,4 +1,4 @@
-// avoid silent errors, make web app faster, avoid unsafe syntax for future
+// avoid unsafe syntax, silent errors and make web app faster
 'use strict';
 
 // mount web app framework
@@ -74,6 +74,12 @@ app.post("/api/shorturl/new", (req, res) => {
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
+      mongodbDocument.findOne({original_url: url.}, (err, data) => {
+    if (err) return console.log(err);
+    done(null, data);
+  });
+}
+      
       res.json({
         original_url: req.body.url,
         short_url: "to be defined"});
