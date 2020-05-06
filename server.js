@@ -74,10 +74,10 @@ app.post("/api/shorturl/new", (req, res) => {
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
-      MongooseModel.find({original_url: url.hostname}, (err, data) => {
+      /*MongooseModel.find({original_url: url.hostname}, (err, data) => {
         if (err) return console.log(err);
         console.log(data);
-      });
+      });*/
     }
   });
 });
@@ -92,6 +92,11 @@ app.get("/:urlId", (req, res) => {
 MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
   console.log(doc);
+});
+
+MongooseModel.find({original_url: "www.freecodecamp.com"}, (err, data) => {
+    if (err) return console.log(err);
+    done(null, data);
 });
 
 app.listen(port, function () {
