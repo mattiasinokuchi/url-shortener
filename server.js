@@ -94,9 +94,9 @@ MongooseModel.find((err, doc)=> {
   console.log(doc);
 });
 
-MongooseModel.find({original_url: "www.freecodecamp.com"}, (err, data) => {
-    if (err) return console.log(err);
-    done(null, data);
+MongooseModel.find({original_url: "www.freecodecamp.org"}, (err, data) => {
+  if (err) return console.log(err);
+  console.log(data._id);
 });
 
 app.listen(port, function () {
