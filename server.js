@@ -96,9 +96,13 @@ MongooseModel.find((err, doc)=> {
 
 MongooseModel.find({original_url: "www.freecodecamp.org"}, (err, data) => {
   if (err) return console.log(err);
+  console.log(data.original_url)
   let str = JSON.stringify(data);
   console.log(typeof str);
   console.log(str);
+  let obj = JSON.parse(str);
+  console.log(typeof obj);
+  console.log(obj.original_url);
 });
 
 app.listen(port, function () {
