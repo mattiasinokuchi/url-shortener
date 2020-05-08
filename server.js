@@ -52,7 +52,7 @@ const mongooseSchema = new mongoose.Schema ({
     type: String,
     unique: false
   },
-  protocol: {
+  href: {
     type: String,
     unique: false
   }
@@ -64,7 +64,6 @@ const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 // POST a URL...
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
-  console.log(url);
   // ...check if the URL is valid...
   dns.lookup(url.hostname, (err) => {
     if (err) {
@@ -77,7 +76,7 @@ app.post("/api/shorturl/new", (req, res) => {
       // ...save document (URL) in database...
       let mongodbDocument = new MongooseModel({
         original_url: url.hostname,
-        protocol: url.protocol
+        href: url.href
       });
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
@@ -105,6 +104,7 @@ app.get("/:urlId", (req, res) => {
       original_url: data[0].original_url,
       short_url: data[0]._id
     });
+    //res.redirect(data[0].href);
   });
 });
 
