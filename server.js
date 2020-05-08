@@ -60,6 +60,7 @@ const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 // POST a URL...
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
+  console.log(url);
   // ...check if the URL is valid...
   dns.lookup(url.hostname, (err) => {
     if (err) {
@@ -103,10 +104,10 @@ app.get("/:urlId", (req, res) => {
 });
 
 // log all documents in database
-MongooseModel.find((err, doc)=> {
+/*MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
   console.log(doc);
-});
+});*/
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
