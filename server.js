@@ -52,6 +52,10 @@ const mongooseSchema = new mongoose.Schema ({
     type: String,
     unique: false
   },
+  protocol: {
+    type: String,
+    unique: false
+  }
 });
 
 // define model (class) for MongoDB documents 
@@ -72,7 +76,8 @@ app.post("/api/shorturl/new", (req, res) => {
     } else {
       // ...save document (URL) in database...
       let mongodbDocument = new MongooseModel({
-        original_url: url.hostname
+        original_url: url.hostname,
+        protocol: url.protocol
       });
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
@@ -104,10 +109,10 @@ app.get("/:urlId", (req, res) => {
 });
 
 // log all documents in database
-/*MongooseModel.find((err, doc)=> {
+MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
   console.log(doc);
-});*/
+});
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
