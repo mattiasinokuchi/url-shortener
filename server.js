@@ -57,26 +57,26 @@ const mongooseSchema = new mongoose.Schema ({
 // define model (class) for MongoDB documents 
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
   
-// POST a URL
+// POST a URL...
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
-  // Check if the URL is valid
+  // ...check if the URL is valid...
   dns.lookup(url.hostname, (err) => {
     if (err) {
-      // Respond with an error or...
+      // ...respond with an error or...
       console.error(err);
       res.json({
         error: "invalid URL"
       });
     } else {
-      // ...save URL in database...
+      // ...save document (URL) in database...
       let mongodbDocument = new MongooseModel({
         original_url: url.hostname
       });
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
-      // ...and respond with the URL
+      // ...and respond with URL and object ID
       MongooseModel.find({original_url: url.hostname}, (err, data) => {
         if (err) return console.log(err);
         res.json({
@@ -90,7 +90,9 @@ app.post("/api/shorturl/new", (req, res) => {
 
 // get input from client
 app.get("/:urlId", (req, res) => {
-  const { urlId } = req.params;
+  const urlId = req.params;
+  console.log(typeof urlId);
+  console.log(urlId);
   res.json({echo: urlId});
 });
 
