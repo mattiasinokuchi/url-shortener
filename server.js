@@ -95,7 +95,6 @@ app.get("/:urlId", (req, res) => {
   // ...find and respond with URL and object ID
   MongooseModel.find({_id: urlId}, (err, data) => {
     if (err) return console.log(err);
-    res.redirect("https://www.freecodecamp.org);
     res.json({
       original_url: data[0].original_url,
       short_url: data[0]._id
