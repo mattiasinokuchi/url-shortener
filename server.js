@@ -76,7 +76,6 @@ app.post("/api/shorturl/new", (req, res) => {
       });
       MongooseModel.find({original_url: url.hostname}, (err, data) => {
         if (err) return console.log(err);
-        console.log(data[0]._id);
         res.json({
           original_url: data[0].original_url,
           short_url: data[0]._id
@@ -93,7 +92,7 @@ app.get("/:urlId", (req, res) => {
 });
 
 // log all documents in database
-MongooseModel.find((err, doc)=> {
+/*MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
   console.log(doc);
 });
@@ -101,7 +100,7 @@ MongooseModel.find((err, doc)=> {
 MongooseModel.find({original_url: "www.freecodecamp.org"}, (err, data) => {
   if (err) return console.log(err);
   console.log(data[0]._id);
-});
+});*/
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
