@@ -76,7 +76,7 @@ app.post("/api/shorturl/new", (req, res) => {
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
-      // ...and respond with URL and object ID
+      // ...find and respond with URL and object ID
       MongooseModel.find({original_url: url.hostname}, (err, data) => {
         if (err) return console.log(err);
         res.json({
@@ -88,19 +88,26 @@ app.post("/api/shorturl/new", (req, res) => {
   });
 });
 
-// get input from client
+// get input from client...
 app.get("/:urlId", (req, res) => {
-  const urlId = req.params;
-  console.log(typeof urlId);
+  const { urlId } = req.params;
   console.log(urlId);
-  res.json({echo: urlId});
+  // ...find and respond with URL and object ID
+  MongooseModel.find({_id: urlId}, (err, data) => {
+    if (err) return console.log(err);
+    res.redirect("https://www.freecodecamp.org);
+    res.json({
+      original_url: data[0].original_url,
+      short_url: data[0]._id
+    });
+  });
 });
 
 // log all documents in database
-/*MongooseModel.find((err, doc)=> {
+MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
   console.log(doc);
-});*/
+});
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
