@@ -61,19 +61,22 @@ const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
   // Check if the URL is valid
-  dns.lookup(url.hostname, (err, address, family) => {
+  dns.lookup(url.hostname, (err) => {
     if (err) {
+      // Respond with an error or...
       console.error(err);
       res.json({
         error: "invalid URL"
       });
     } else {
+      // ...save URL in database...
       let mongodbDocument = new MongooseModel({
         original_url: url.hostname
       });
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
+      // ...and respond with the URL
       MongooseModel.find({original_url: url.hostname}, (err, data) => {
         if (err) return console.log(err);
         res.json({
@@ -95,11 +98,6 @@ app.get("/:urlId", (req, res) => {
 /*MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
   console.log(doc);
-});
-
-MongooseModel.find({original_url: "www.freecodecamp.org"}, (err, data) => {
-  if (err) return console.log(err);
-  console.log(data[0]._id);
 });*/
 
 app.listen(port, function () {
