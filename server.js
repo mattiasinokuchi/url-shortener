@@ -62,6 +62,7 @@ const mongooseSchema = new mongoose.Schema ({
 const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
   
 // POST a URL...
+console.log("POST a URL...");
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
   // ...check if the URL is valid...
@@ -73,7 +74,8 @@ app.post("/api/shorturl/new", (req, res) => {
         error: "invalid URL"
       });
     } else {
-      // ...save document (URL) in database...
+      console.log("...check if the URL is valid...");
+      // ...save document with URL in database...
       let mongodbDocument = new MongooseModel({
         original_url: url.hostname,
         href: url.href
@@ -96,23 +98,19 @@ app.post("/api/shorturl/new", (req, res) => {
 // get input from client...
 app.get("/:urlId", (req, res) => {
   const { urlId } = req.params;
-  console.log(urlId);
-  // ...find and respond with URL and object ID
+  // ...find document with URL with object ID...
   MongooseModel.find({_id: urlId}, (err, data) => {
     if (err) return console.log(err);
-    /*res.json({
-      original_url: data[0].original_url,
-      short_url: data[0]._id
-    });*/
+    // ...and redirect to URL
     res.redirect(data[0].href);
   });
 });
 
 // log all documents in database
-MongooseModel.find((err, doc)=> {
+/*MongooseModel.find((err, doc)=> {
   if (err) return console.error(err);
   console.log(doc);
-});
+});*/
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
