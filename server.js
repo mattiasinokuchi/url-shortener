@@ -64,17 +64,20 @@ const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
 // POST a URL...
 console.log("POST a URL...");
 app.post("/api/shorturl/new", (req, res) => {
+  console.log("...pick up URL...");
   let url = new URL(req.body.url);
   // ...check if the URL is valid...
+  console.log("...check if the URL is valid...");
   dns.lookup(url.hostname, (err) => {
     if (err) {
+      console.log("...respond with an error or...");
       // ...respond with an error or...
       console.error(err);
       res.json({
         error: "invalid URL"
       });
     } else {
-      console.log("...check if the URL is valid...");
+      console.log("...save document with URL in database...");
       // ...save document with URL in database...
       let mongodbDocument = new MongooseModel({
         original_url: url.hostname,
@@ -83,6 +86,7 @@ app.post("/api/shorturl/new", (req, res) => {
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
       });
+      console.log("...find and respond with URL and object ID");
       // ...find and respond with URL and object ID
       MongooseModel.find({original_url: url.hostname}, (err, data) => {
         if (err) return console.log(err);
