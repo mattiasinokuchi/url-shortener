@@ -1,17 +1,17 @@
 // avoid unsafe syntax, silent errors and make web app faster
-'use strict';
+"use strict";
 
 // mount web app framework
-const express = require('express');
+const express = require("express");
 
 // mount database
-const mongo = require('mongodb');
+const mongo = require("mongodb");
 
 // mount database framework
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-// mount module for verification of the project by FCC 
-const cors = require('cors');
+// mount module for verification of the project by FCC
+const cors = require("cors");
 
 // mount module for validation of URL
 const dns = require("dns");
@@ -22,7 +22,7 @@ const bodyParser = require("body-parser");
 // create web server
 const app = express();
 
-// define a port for the web server to listen to 
+// define a port for the web server to listen to
 const port = process.env.PORT || 3000;
 
 // connect database
@@ -33,21 +33,21 @@ mongoose.connect(process.env.DB_URI, {
 });
 
 // set up web server with path for static files
-app.use('/public', express.static(process.cwd() + '/public'));
+app.use("/public", express.static(process.cwd() + "/public"));
 
 // set up routing for web page
-app.get('/', function(req, res) {
-  res.sendFile(process.cwd() + '/views/index.html');
+app.get("/", function(req, res) {
+  res.sendFile(process.cwd() + "/views/index.html");
 });
 
 // set up module for verification of the project by FCC
 app.use(cors());
 
 // set up module to parse POST bodies
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // define schema (constructor) for MongoDB documents
-const mongooseSchema = new mongoose.Schema ({
+const mongooseSchema = new mongoose.Schema({
   original_url: {
     type: String,
     unique: false
@@ -58,17 +58,16 @@ const mongooseSchema = new mongoose.Schema ({
   }
 });
 
-// define model (class) for MongoDB documents 
-const MongooseModel = mongoose.model ("MongooseModel", mongooseSchema);
-  
+// define model (class) for MongoDB documents
+const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
+
 // POST a URL...
-console.log("POST a URL...");
 app.post("/api/shorturl/new", (req, res) => {
   console.log("...pick up URL...");
   let url = new URL(req.body.url);
   // ...check if the URL is valid...
   console.log("...check if the URL is valid...");
-  dns.lookup(url.hostname, (err) => {
+  dns.lookup(url.hostname, err => {
     if (err) {
       console.log("...respond with an error or...");
       // ...respond with an error or...
@@ -85,11 +84,14 @@ app.post("/api/shorturl/new", (req, res) => {
       });
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
-        console.log(data);
+        res.json({
+          original_url: data.original_url,
+          short_url: data._id
+        });
       });
-      console.log("...find and respond with URL and object ID");
+      //console.log("...find and respond with URL and object ID");
       // ...find and respond with URL and object ID
-/*      MongooseModel.find({original_url: url.hostname}, (err, data) => {
+      /*      MongooseModel.find({original_url: url.hostname}, (err, data) => {
         if (err) return console.log(err);
         res.json({
           original_url: data[0].original_url,
@@ -104,7 +106,7 @@ app.post("/api/shorturl/new", (req, res) => {
 app.get("/:urlId", (req, res) => {
   const { urlId } = req.params;
   // ...find document with URL with object ID...
-  MongooseModel.find({_id: urlId}, (err, data) => {
+  MongooseModel.find({ _id: urlId }, (err, data) => {
     if (err) return console.log(err);
     // ...and redirect to URL
     res.redirect(data[0].href);
@@ -112,11 +114,11 @@ app.get("/:urlId", (req, res) => {
 });
 
 // log all documents in database
-MongooseModel.find((err, doc)=> {
+/*MongooseModel.find((err, doc) => {
   if (err) return console.error(err);
   console.log(doc);
-});
+});*/
 
-app.listen(port, function () {
-  console.log('Node.js listening ...');
+app.listen(port, function() {
+  console.log("Node.js listening ...");
 });
