@@ -32,18 +32,18 @@ mongoose.connect(process.env.DB_URI, {
   useCreateIndex: true
 });
 
-// set web server with path for static files
+// set up web server with path for static files
 app.use('/public', express.static(process.cwd() + '/public'));
 
-// set routing for web page
+// set up routing for web page
 app.get('/', function(req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
-// enable module for verification of the project by FCC
+// set up module for verification of the project by FCC
 app.use(cors());
 
-// enable module to parse POST bodies
+// set up module to parse POST bodies
 app.use(bodyParser.urlencoded({extended: false}));
 
 // define schema (constructor) for MongoDB documents
@@ -100,11 +100,11 @@ app.get("/:urlId", (req, res) => {
   // ...find and respond with URL and object ID
   MongooseModel.find({_id: urlId}, (err, data) => {
     if (err) return console.log(err);
-    res.json({
+    /*res.json({
       original_url: data[0].original_url,
       short_url: data[0]._id
-    });
-    //res.redirect(data[0].href);
+    });*/
+    res.redirect(data[0].href);
   });
 });
 
