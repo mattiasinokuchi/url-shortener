@@ -61,6 +61,11 @@ const mongooseSchema = new mongoose.Schema({
 // define model (class) for MongoDB documents
 const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 
+MongooseModel.createIndex( { name : -1 }, function(err, result) {
+   console.log(result);
+   callback(result);
+}
+
 // POST a URL...
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
