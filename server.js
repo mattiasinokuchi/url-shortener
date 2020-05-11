@@ -63,21 +63,17 @@ const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 
 // POST a URL...
 app.post("/api/shorturl/new", (req, res) => {
-  console.log("...pick up URL...");
   let url = new URL(req.body.url);
   // ...check if the URL is valid...
-  console.log("...check if the URL is valid...");
   dns.lookup(url.hostname, err => {
     if (err) {
-      console.log("...respond with an error or...");
       // ...respond with an error or...
       console.error(err);
       res.json({
         error: "invalid URL"
       });
     } else {
-      console.log("...save document with URL in database...");
-      // ...save document with URL in database...
+      // ...save URL in database and respond
       let mongodbDocument = new MongooseModel({
         original_url: url.hostname,
         href: url.href
@@ -89,35 +85,26 @@ app.post("/api/shorturl/new", (req, res) => {
           short_url: data._id
         });
       });
-      //console.log("...find and respond with URL and object ID");
-      // ...find and respond with URL and object ID
-      /*      MongooseModel.find({original_url: url.hostname}, (err, data) => {
-        if (err) return console.log(err);
-        res.json({
-          original_url: data[0].original_url,
-          short_url: data[0]._id
-        });
-      });*/
     }
   });
 });
 
 // get input from client...
-app.get("/:urlId", (req, res) => {
+app.get("/api/shorturl/:urlId", (req, res) => {
   const { urlId } = req.params;
-  // ...find document with URL with object ID...
+  // ...find URL in database...
   MongooseModel.find({ _id: urlId }, (err, data) => {
     if (err) return console.log(err);
-    // ...and redirect to URL
+    // ...and redirect accordingly
     res.redirect(data[0].href);
   });
 });
 
 // log all documents in database
-/*MongooseModel.find((err, doc) => {
+MongooseModel.find((err, doc) => {
   if (err) return console.error(err);
   console.log(doc);
-});*/
+});
 
 app.listen(port, function() {
   console.log("Node.js listening ...");
