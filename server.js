@@ -85,16 +85,17 @@ app.post("/api/shorturl/new", (req, res) => {
       });
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
+        console.log(data);
       });
       console.log("...find and respond with URL and object ID");
       // ...find and respond with URL and object ID
-      MongooseModel.find({original_url: url.hostname}, (err, data) => {
+/*      MongooseModel.find({original_url: url.hostname}, (err, data) => {
         if (err) return console.log(err);
         res.json({
           original_url: data[0].original_url,
           short_url: data[0]._id
         });
-      });
+      });*/
     }
   });
 });
