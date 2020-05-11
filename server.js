@@ -62,8 +62,8 @@ const mongooseSchema = new mongoose.Schema({
 const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 
 MongooseModel.createIndex( { name : -1 }, function(err, result) {
-   console.log(result);
-   callback(result);
+  if(err) 
+  console.log(result);
 }
 
 // POST a URL...
