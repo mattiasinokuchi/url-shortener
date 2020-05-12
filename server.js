@@ -36,7 +36,7 @@ mongoose.connect(process.env.DB_URI, {
 app.use("/public", express.static(process.cwd() + "/public"));
 
 // set up routing for web page
-app.get("/", function(req, res) {
+app.get("/", (req, res) => {
   res.sendFile(process.cwd() + "/views/index.html");
 });
 
@@ -104,7 +104,7 @@ app.get("/api/shorturl/:urlId", (req, res) => {
 });
 
 // count documents in database
-MongooseModel.estimatedDocumentCount({ }, (err, count) => {
+/*MongooseModel.estimatedDocumentCount({ }, (err, count) => {
   if (err) return console.error(err);
   console.log('there are %d documents', count);
 });
@@ -113,7 +113,7 @@ MongooseModel.estimatedDocumentCount({ }, (err, count) => {
 MongooseModel.find((err, doc) => {
   if (err) return console.error(err);
   console.log(doc);
-});
+});*/
 
 app.listen(port, () => {
   console.log("Node.js listening ...");
