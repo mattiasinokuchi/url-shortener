@@ -100,6 +100,10 @@ MongooseModel.find((err, doc) => {
   console.log(doc);
 });
 
+// count documents in database
+let num = MongooseModel.estimatedDocumentCount();
+console.log(num);
+
 app.listen(port, function() {
   console.log("Node.js listening ...");
 });
