@@ -78,19 +78,17 @@ app.post("/api/shorturl/new", (req, res) => {
           original_url: url.hostname,
           short_url: urlCounts,
           href: url.href
+        });
         mongodbDocument.save((err, data) => {
-        if (err) return console.error(err);
-        res.json({
-          original_url: data.original_url,
-          short_url: data.short_url
+          if (err) return console.error(err);
+          res.json({
+            original_url: data.original_url,
+            short_url: data.short_url
+          });
         });
-      });
-          
-        });
-  
       });
       // ...save URL in database and respond
-          }
+    }
   });
 });
 
