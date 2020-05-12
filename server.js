@@ -94,16 +94,15 @@ app.get("/api/shorturl/:urlId", (req, res) => {
   });
 });
 
-// count documents in database
-MongooseModel.estimatedDocumentCount({ }, function (err, count) {
-  console.log('there are %d documents', count);
-});
-
 // log all documents in database
 MongooseModel.find((err, doc) => {
   if (err) return console.error(err);
   console.log(doc);
 });
+
+// count documents in database
+let num = MongooseModel.estimatedDocumentCount();
+console.log(num);
 
 app.listen(port, function() {
   console.log("Node.js listening ...");
