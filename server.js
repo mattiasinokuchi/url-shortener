@@ -49,6 +49,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // define schema (constructor) for MongoDB documents
 const mongooseSchema = new mongoose.Schema({
   original_url: String,
+  short_url: String,
   href: String
 });
 
@@ -70,13 +71,14 @@ app.post("/api/shorturl/new", (req, res) => {
       // ...save URL in database and respond
       let mongodbDocument = new MongooseModel({
         original_url: url.hostname,
+        short_url: MongooseModel.estimatedDocumentCount({ }),
         href: url.href
       });
       mongodbDocument.save((err, data) => {
         if (err) return console.error(err);
         res.json({
           original_url: data.original_url,
-          short_url: data._id
+          short_url: data.short_url
         });
       });
     }
@@ -87,7 +89,7 @@ app.post("/api/shorturl/new", (req, res) => {
 app.get("/api/shorturl/:urlId", (req, res) => {
   const { urlId } = req.params;
   // ...find URL in database...
-  MongooseModel.find({ _id: urlId }, (err, data) => {
+  MongooseModel.find({ short_url: urlId }, (err, data) => {
     if (err) return console.log(err);
     // ...and redirect accordingly
     res.redirect(data[0].href);
