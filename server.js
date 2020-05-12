@@ -10,7 +10,7 @@ const mongo = require("mongodb");
 // mount database framework
 const mongoose = require("mongoose");
 
-// mount module for verification of the project by FCC
+// mount module to allow verification by FCC
 const cors = require("cors");
 
 // mount module for validation of URL
@@ -25,7 +25,7 @@ const app = express();
 // define a port for the web server to listen to
 const port = process.env.PORT || 3000;
 
-// connect database
+// connect and set up database
 mongoose.connect(process.env.DB_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -48,25 +48,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // define schema (constructor) for MongoDB documents
 const mongooseSchema = new mongoose.Schema({
-  original_url: {
-    type: String,
-    unique: false
-  },
-  href: {
-    type: String,
-    unique: false
-  },
-  name: {
-    type: Number,
-    unique: false,
-    index: true
-  }
-});
-
-mongooseSchema.index( { name : -1 }, function(err, result) {
-  if (err) {
-    console.error(err);
-  }
+  original_url: String,
+  href: String
 });
 
 // define model (class) for MongoDB documents
