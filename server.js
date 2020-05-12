@@ -68,10 +68,16 @@ app.post("/api/shorturl/new", (req, res) => {
         error: "invalid URL"
       });
     } else {
+      // count URL's in database
+      let urlCounts = 0;
+      MongooseModel.estimatedDocumentCount({ }, function (err, count) {
+        if (err) return console.error(err);
+        urlCounts = count;
+      });
       // ...save URL in database and respond
       let mongodbDocument = new MongooseModel({
         original_url: url.hostname,
-        short_url: MongooseModel.estimatedDocumentCount({ }),
+        short_url: urlCounts,
         href: url.href
       });
       mongodbDocument.save((err, data) => {
@@ -98,6 +104,7 @@ app.get("/api/shorturl/:urlId", (req, res) => {
 
 // count documents in database
 MongooseModel.estimatedDocumentCount({ }, function (err, count) {
+  if (err) return console.error(err);
   console.log('there are %d documents', count);
 });
 
