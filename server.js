@@ -58,18 +58,19 @@ const mongooseSchema = new mongoose.Schema({
   },
   name: {
     type: Number,
-    unique: false
+    unique: false,
+    index: true
+  }
+});
+
+mongooseSchema.index( { name : -1 }, function(err, result) {
+  if (err) {
+    console.error(err);
   }
 });
 
 // define model (class) for MongoDB documents
 const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
-
-MongooseSc.index( { name : -1 }, function(err, result) {
-  if (err) {
-    console.error(err);
-  }
-});
 
 // POST a URL...
 app.post("/api/shorturl/new", (req, res) => {
