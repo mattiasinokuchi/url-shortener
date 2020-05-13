@@ -69,16 +69,15 @@ app.post("/api/shorturl/new", (req, res) => {
       });
     } else {
       // ...count URL's in database...
-      let urlCounts = 0;
       MongooseModel.estimatedDocumentCount({ }, (err, count) => {
         if (err) return console.error(err);
-        urlCounts = count;
-        console.log(urlCounts);
+        //...create document (object for )...
         let mongodbDocument = new MongooseModel({
           original_url: url.hostname,
-          short_url: urlCounts,
+          short_url: count,
           href: url.href
         });
+        // ...save URL in database and respond
         mongodbDocument.save((err, data) => {
           if (err) return console.error(err);
           res.json({
