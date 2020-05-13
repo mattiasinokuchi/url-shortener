@@ -19,7 +19,7 @@ const bodyParser = require("body-parser");
 // create web server
 const app = express();
 
-// define a port for the web server to listen to
+// define port for web server
 const port = process.env.PORT || 3000;
 
 // connect and set up database
