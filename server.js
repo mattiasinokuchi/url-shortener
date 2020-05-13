@@ -4,9 +4,6 @@
 // mount web app framework
 const express = require("express");
 
-// mount database
-const mongo = require("mongodb");
-
 // mount database framework
 const mongoose = require("mongoose");
 
