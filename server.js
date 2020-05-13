@@ -68,7 +68,7 @@ app.post("/api/shorturl/new", (req, res) => {
         error: "invalid URL"
       });
     } else {
-      // count URL's in database...
+      // ...count URL's in database...
       let urlCounts = 0;
       MongooseModel.estimatedDocumentCount({ }, (err, count) => {
         if (err) return console.error(err);
@@ -87,7 +87,6 @@ app.post("/api/shorturl/new", (req, res) => {
           });
         });
       });
-      // ...save URL in database and respond
     }
   });
 });
@@ -103,17 +102,12 @@ app.get("/api/shorturl/:urlId", (req, res) => {
   });
 });
 
-// count documents in database
-/*MongooseModel.estimatedDocumentCount({ }, (err, count) => {
-  if (err) return console.error(err);
-  console.log('there are %d documents', count);
-});
 
 // log all documents in database
 MongooseModel.find((err, doc) => {
   if (err) return console.error(err);
   console.log(doc);
-});*/
+});
 
 app.listen(port, () => {
   console.log("Node.js listening ...");
