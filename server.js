@@ -32,7 +32,7 @@ mongoose.connect(process.env.DB_URI, {
 // set up web server with path for static files
 app.use("/public", express.static(process.cwd() + "/public"));
 
-// set up routing for web page
+// route handler for web page
 app.get("/", (req, res) => {
   res.sendFile(process.cwd() + "/views/index.html");
 });
@@ -87,10 +87,10 @@ app.post("/api/shorturl/new", (req, res) => {
   });
 });
 
-// get input from client...
+// route handler for shortened URL's
 app.get("/api/shorturl/:urlId", (req, res) => {
   const { urlId } = req.params;
-  // ...find URL in database...
+  // find URL in database...
   MongooseModel.find({ short_url: urlId }, (err, data) => {
     if (err) return console.log(err);
     // ...and redirect accordingly
@@ -105,6 +105,7 @@ MongooseModel.find((err, doc) => {
   console.log(doc);
 });
 
+// start web server
 app.listen(port, () => {
   console.log("Node.js listening ...");
 });
