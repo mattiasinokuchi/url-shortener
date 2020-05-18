@@ -33,9 +33,12 @@ mongoose.connect(process.env.DB_URI, {
 app.use("/public", express.static(process.cwd() + "/public"));
 
 // route handler for web page
-app.get("/", (req, res) => {
+const indexRouter = require("./routes/index");
+app.use("/", indexRouter);
+
+/*app.get("/", (req, res) => {
   res.sendFile(process.cwd() + "/views/index.html");
-});
+});*/
 
 // set up module for verification of the project by FCC
 app.use(cors());
