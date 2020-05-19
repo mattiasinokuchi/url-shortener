@@ -34,13 +34,9 @@ app.use("/public", express.static(process.cwd() + "/public"));
 
 console.log(process.cwd());
 
-// mount middleware function for route handler to web page
+// mount middleware for web page routing
 const indexRouter = require("./routes/index");
 app.use("/", indexRouter);
-
-/*app.get("/", (req, res) => {
-  res.sendFile(process.cwd() + "/views/index.html");
-});*/
 
 // set up module for verification of the project by FCC
 app.use(cors());
