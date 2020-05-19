@@ -29,10 +29,12 @@ mongoose.connect(process.env.DB_URI, {
   useCreateIndex: true
 });
 
-// set up web server with path for static files
+// mounts middleware to serve static files
 app.use("/public", express.static(process.cwd() + "/public"));
 
-// route handler for web page
+console.log(process.cwd());
+
+// mounts middleware for route handler for web page
 const indexRouter = require("./routes/index");
 app.use("/", indexRouter);
 
