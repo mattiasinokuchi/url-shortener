@@ -6,7 +6,7 @@ const router = express.Router();
 
 // GET home page
 router.get('/', (req, res) => {
-  res.redirect("/views/index.html");
+  res.sendFile(process.cwd() + "/views/index.html");
 });
 
 module.exports = router;
