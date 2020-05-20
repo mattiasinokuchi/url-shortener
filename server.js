@@ -19,7 +19,7 @@ const bodyParser = require("body-parser");
 // create web server
 const app = express();
 
-// define port for web server
+// define a port for the web server to listen to
 const port = process.env.PORT || 3000;
 
 // connect and set up database
@@ -29,14 +29,13 @@ mongoose.connect(process.env.DB_URI, {
   useCreateIndex: true
 });
 
-// mount middleware to serve static files
+// set up web server with path for static files
 app.use("/public", express.static(process.cwd() + "/public"));
 
-console.log(process.cwd());
-
-// mount middleware for web page routing
-const indexRouter = require("./routes/index");
-app.use("/", indexRouter);
+// set up routing for web page
+app.get("/", (req, res) => {
+  res.sendFile(process.cwd() + "/views/index.html");
+});
 
 // set up module for verification of the project by FCC
 app.use(cors());
@@ -88,10 +87,10 @@ app.post("/api/shorturl/new", (req, res) => {
   });
 });
 
-// route handler for shortened URL's
+// get input from client...
 app.get("/api/shorturl/:urlId", (req, res) => {
   const { urlId } = req.params;
-  // find URL in database...
+  // ...find URL in database...
   MongooseModel.find({ short_url: urlId }, (err, data) => {
     if (err) return console.log(err);
     // ...and redirect accordingly
@@ -106,7 +105,6 @@ MongooseModel.find((err, doc) => {
   console.log(doc);
 });
 
-// start web server
 app.listen(port, () => {
   console.log("Node.js listening ...");
 });
