@@ -54,8 +54,12 @@ const mongooseSchema = new mongoose.Schema({
 const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 
 // POST a URL...
-const checkURL = (url, err) => {
-  dns.lookup(url.hostname)
+
+// save document and respond
+const saveAndRespond = (doc) => {
+  doc.save((err, data) => {
+    if (err) 
+  });
 };
 
 app.post("/api/shorturl/new", (req, res) => {
