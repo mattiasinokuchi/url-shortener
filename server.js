@@ -54,7 +54,9 @@ const mongooseSchema = new mongoose.Schema({
 const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 
 // POST a URL...
-const checkURL = 
+const checkURL = (url, err) => {
+  dns.lookup(url.hostname)
+};
 
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
