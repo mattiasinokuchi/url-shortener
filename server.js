@@ -56,15 +56,16 @@ const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 // POST a URL...
 
 // save document and respond
-/*const saveAndRespond = (doc, res) => {
+const saveAndRespond = (doc, res) => {
   doc.save((err, data) => {
     if (err) return console.error(err);
-    res.json({
+    res.json({text: "det fungerar"});
+    /*res.json({
       original_url: data.original_url,
       short_url: data.short_url
-    });
+    });*/
   });
-};*/
+};
 
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
@@ -86,15 +87,15 @@ app.post("/api/shorturl/new", (req, res) => {
           short_url: count,
           href: url.href
         });
-        //saveAndRespond(mongodbDocument);
+        saveAndRespond(mongodbDocument);
         // ...save documents (object) in database and respond
-        mongodbDocument.save((err, data) => {
+        /*mongodbDocument.save((err, data) => {
           if (err) return console.error(err);
           res.json({
             original_url: data.original_url,
             short_url: data.short_url
           });
-        });
+        });*/
       });
     }
   });
