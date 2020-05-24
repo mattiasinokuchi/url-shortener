@@ -57,12 +57,12 @@ const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 
 // save document and respond
 const saveAndRespond = (doc) => {
-  doc.save((err, data) => {
+  doc.save((res, err, data) => {
     if (err) return console.error(err);
-    /*res.json({
+    res.json({
       original_url: data.original_url,
       short_url: data.short_url
-    });*/
+    });
   });
 };
 
@@ -87,7 +87,7 @@ app.post("/api/shorturl/new", (req, res) => {
           href: url.href
         });
         saveAndRespond(mongodbDocument);
-        res.json({status: "ok"})
+        //res.json({status: "ok"})
         // ...save documents (object) in database and respond
         /*mongodbDocument.save((err, data) => {
           if (err) return console.error(err);
