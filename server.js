@@ -63,7 +63,6 @@ const saveAndRespond = (doc) => {
       original_url: data.original_url,
       short_url: data.short_url
     });*/
-    res.json({data});
   });
 };
 
