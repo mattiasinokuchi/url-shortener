@@ -57,7 +57,7 @@ const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 
 // save document and respond
 const saveAndRespond = (doc) => {
-  doc.save((res, err, data) => {
+  doc.save((err, data, res) => {
     if (err) return console.error(err);
     res.json({
       original_url: data.original_url,
