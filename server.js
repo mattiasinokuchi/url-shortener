@@ -60,7 +60,6 @@ const saveAndRespond = (doc) => {
   doc.save((err, data) => {
     if (err) return console.error(err);
     else console.log("data saved");
-    
     /*res.json({
       original_url: data.original_url,
       short_url: data.short_url
@@ -89,7 +88,6 @@ app.post("/api/shorturl/new", (req, res) => {
           href: url.href
         });
         saveAndRespond(mongodbDocument);
-        //res.json({status: "ok"});
         // ...save documents (object) in database and respond
         /*mongodbDocument.save((err, data) => {
           if (err) return console.error(err);
