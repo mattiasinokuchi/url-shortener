@@ -56,16 +56,15 @@ const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 // POST a URL...
 
 // save document and respond
-const saveAndRespond = (doc) => {
-  doc.save((err, data) => {
+/*const saveAndRespond = (doc) => {
+  doc.save((err, data, res) => {
     if (err) return console.error(err);
-    else console.log("data saved");
-    /*res.json({
+    res.json({
       original_url: data.original_url,
       short_url: data.short_url
-    });*/
+    });
   });
-};
+};*/
 
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
@@ -87,15 +86,15 @@ app.post("/api/shorturl/new", (req, res) => {
           short_url: count,
           href: url.href
         });
-        saveAndRespond(mongodbDocument);
+        //saveAndRespond(mongodbDocument);
         // ...save documents (object) in database and respond
-        /*mongodbDocument.save((err, data) => {
+        mongodbDocument.save((err, data) => {
           if (err) return console.error(err);
           res.json({
             original_url: data.original_url,
             short_url: data.short_url
           });
-        });*/
+        });
       });
     }
   });
@@ -112,12 +111,11 @@ app.get("/api/shorturl/:urlId", (req, res) => {
   });
 });
 
-
 // log all documents in database
-MongooseModel.find((err, doc) => {
+/*MongooseModel.find((err, doc) => {
   if (err) return console.error(err);
   console.log(doc);
-});
+});*/
 
 app.listen(port, () => {
   console.log("Node.js listening ...");
