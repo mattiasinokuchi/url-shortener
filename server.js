@@ -59,7 +59,7 @@ const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 const saveAndRespond = (doc) => {
   doc.save((err, data, res) => {
     if (err) return console.error(err);
-    res.send({
+    res.json({
       original_url: data.original_url,
       short_url: data.short_url
     });
