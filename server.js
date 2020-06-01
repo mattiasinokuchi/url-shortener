@@ -53,8 +53,6 @@ const mongooseSchema = new mongoose.Schema({
 // define model (class) for MongoDB documents
 const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 
-// POST a URL...
-
 // save document and respond
 const saveAndRespond = (doc) => {
   doc.save((err, data, res) => {
@@ -66,6 +64,7 @@ const saveAndRespond = (doc) => {
   });
 };
 
+// POST a URL...
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
   // ...check if the URL is valid...
@@ -110,12 +109,6 @@ app.get("/api/shorturl/:urlId", (req, res) => {
     res.redirect(data[0].href);
   });
 });
-
-// log all documents in database
-/*MongooseModel.find((err, doc) => {
-  if (err) return console.error(err);
-  console.log(doc);
-});*/
 
 app.listen(port, () => {
   console.log("Node.js listening ...");
