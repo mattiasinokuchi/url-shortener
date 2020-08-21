@@ -53,7 +53,7 @@ const mongooseSchema = new mongoose.Schema({
 // define model (class) for MongoDB documents
 const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 
-// save document and respond
+// save document in database and respond
 const saveAndRespond = (doc) => {
   doc.save((err, data, res) => {
     if (err) return console.error(err);
