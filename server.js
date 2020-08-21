@@ -53,17 +53,6 @@ const mongooseSchema = new mongoose.Schema({
 // define model (class) for MongoDB documents
 const MongooseModel = mongoose.model("MongooseModel", mongooseSchema);
 
-// save document in database and respond
-const saveAndRespond = (doc) => {
-  doc.save((err, data, res) => {
-    if (err) return console.error(err);
-    res.json({
-      original_url: data.original_url,
-      short_url: data.short_url
-    });
-  });
-};
-
 // POST a URL...
 app.post("/api/shorturl/new", (req, res) => {
   let url = new URL(req.body.url);
@@ -85,15 +74,14 @@ app.post("/api/shorturl/new", (req, res) => {
           short_url: count,
           href: url.href
         });
-        saveAndRespond(mongodbDocument);
         // ...save documents (object) in database and respond
-        /*mongodbDocument.save((err, data) => {
+        mongodbDocument.save((err, data) => {
           if (err) return console.error(err);
           res.json({
             original_url: data.original_url,
             short_url: data.short_url
           });
-        });*/
+        });
       });
     }
   });
